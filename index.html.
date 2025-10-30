@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Monitor de Gases MQ-2</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #333; }
+    label, select, input, button { margin-top: 10px; display: block; }
+    #resultado { margin-top: 20px; padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>Registro de lectura de gas</h1>
+
+  <form id="formulario">
+    <label for="valor">Valor numérico (0 a 9600):</label>
+    <input type="number" id="valor" name="valor" min="0" max="9600" required>
+
+    <label for="gas">Nombre del gas:</label>
+    <select id="gas" name="gas" required>
+      <option value="">-- Selecciona un gas --</option>
+      <option value="Metano">Metano</option>
+      <option value="Gases combustibles">Gases combustibles</option>
+      <option value="Monóxido de carbono">Monóxido de carbono</option>
+      <option value="Hidrógeno">Hidrógeno</option>
+    </select>
+
+    <button type="submit">Evaluar</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    const textos = {
+      "Metano": {
+        bajo: {
+          titulo: "🔵 Nivel bajo de metano",
+          causa: "Fugas pequeñas en estufas, fermentación de residuos orgánicos, emisiones de ganado.",
+          recomendaciones: "Ventila cocinas, promueve compostaje controlado y biodigestores comunitarios."
+        },
+        medio: {
+          titulo: "🟠 Concentración elevada de metano",
+          causa: "Fugas en redes de gas, acumulación en pozos sépticos, vertederos mal gestionados.",
+          recomendaciones: "Revisa instalaciones, evita acumulación de residuos, educa sobre riesgos."
+        },
+        alto: {
+          titulo: "🔴 Riesgo crítico por metano",
+          causa: "Escapes graves, fallas en tratamiento de residuos, incendios subterráneos.",
+          recomendaciones: "Evacúa, corta energía, reporta fugas y promueve gestión ambiental."
+        }
+      },
+      "Gases combustibles": {
+        bajo: {
+          titulo: "🔵 Presencia mínima de gases inflamables",
+          causa: "Uso doméstico de gas, pequeñas fugas, emisiones de vehículos en reposo.",
+          recomendaciones: "Mantén equipos y vehículos, apaga motores detenidos, promueve transporte limpio."
+        },
+        medio: {
+          titulo: "🟠 Nivel preocupante de gases combustibles",
+          causa: "Fugas en cilindros, acumulación en garajes, emisiones de vehículos en espacios cerrados.",
+          recomendaciones: "Ventila espacios, revisa fugas, fomenta mantenimiento vehicular."
+        },
+        alto: {
+          titulo: "🔴 Alerta por riesgo de explosión",
+          causa: "Escapes graves, acumulación en túneles o zonas con tráfico denso.",
+          recomendaciones: "Evacúa, reporta, promueve zonas libres de vehículos y control de emisiones."
+        }
+      },
+      "Monóxido de carbono": {
+        bajo: {
+          titulo: "🔵 Nivel bajo de monóxido de carbono",
+          causa: "Combustión incompleta en estufas, calentadores, vehículos encendidos en garajes.",
+          recomendaciones: "Ventila, mantén equipos, educa sobre riesgos invisibles."
+        },
+        medio: {
+          titulo: "🟠 Concentración peligrosa de CO",
+          causa: "Estufas mal calibradas, motores encendidos en espacios cerrados, quema de basura.",
+          recomendaciones: "Evita quemar residuos, instala detectores, promueve tecnologías limpias."
+        },
+        alto: {
+          titulo: "🔴 Emergencia por intoxicación",
+          causa: "Incendios, fallas graves en calefacción, acumulación en túneles o sótanos.",
+          recomendaciones: "Evacúa, busca atención médica, fomenta energías renovables."
+        }
+      },
+      "Hidrógeno": {
+        bajo: {
+          titulo: "🔵 Presencia mínima de hidrógeno",
+          causa: "Procesos industriales, baterías, fermentación natural.",
+          recomendaciones: "Monitorea espacios técnicos, recicla componentes, educa sobre riesgos."
+        },
+        medio: {
+          titulo: "🟠 Concentración elevada de hidrógeno",
+          causa: "Fugas en almacenamiento, procesos químicos sin ventilación.",
+          recomendaciones: "Ventila talleres, capacita sobre manejo seguro, promueve uso responsable."
+        },
+        alto: {
+          titulo: "🔴 Riesgo extremo de explosión",
+          causa: "Fallas en celdas de combustible, acumulación en espacios cerrados.",
+          recomendaciones: "Evacúa, corta ignición, implementa protocolos y controles ambientales."
+        }
+      }
+    };
+
+    document.getElementById("formulario").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const valor = parseInt(document.getElementById("valor").value);
+      const gas = document.getElementById("gas").value;
+
+      let nivel;
+      if (valor < 80) nivel = "bajo";
+      else if (valor > 500) nivel = "alto";
+      else if (valor > 200) nivel = "medio";
+      else nivel = "bajo"; // entre 80 y 200 se considera bajo por defecto
+
+      if (textos[gas]) {
+        const info = textos[gas][nivel];
+        document.getElementById("resultado").innerHTML = `
+          <h2>${info.titulo}</h2>
+          <p><strong>¿Qué lo puede producir?</strong> ${info.causa}</p>
+          <p><strong>Recomendaciones ambientales:</strong> ${info.recomendaciones}</p>
+        `;
+      } else {
+        document.getElementById("resultado").innerHTML = "<p>No se encontró información para ese gas.</p>";
+      }
+    });
+  </script>
+</body>
+</html>
