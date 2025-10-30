@@ -2,16 +2,73 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Monitor de Gases MQ-2</title>
+  <title>Monitor de Gases MQ-2 - Liceo Caucasia</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { color: #333; }
-    label, select, input, button { margin-top: 10px; display: block; }
-    #resultado { margin-top: 20px; padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #eef5f9;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    header img {
+      height: 80px;
+      vertical-align: middle;
+      margin-right: 15px;
+    }
+    h1 {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+    }
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label, select, input, button {
+      margin-top: 10px;
+      display: block;
+      width: 100%;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #resultado {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+    footer {
+      margin-top: 30px;
+      text-align: center;
+    }
+    footer img {
+      height: 100px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
-  <h1>Registro de lectura de gas</h1>
+  <header>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjru2riziB9QZb2zGEREFAFHsczcm4bH4IHD9eMqR0UTmZJzMnb8Idsc-cKYcUKKzIpwcVxUSnOe7lw4yGSpyW9gfLKXYlC5J01sVuDLJf_KosBEfLIHjWhnuLcoOKaSKRnp-ilgmQR5tk/w1200-h630-p-k-no-nu/escudo.jpg" alt="Escudo Liceo Caucasia">
+    <h1>Monitor de Gases MQ-2 - Liceo Caucasia</h1>
+  </header>
 
   <form id="formulario">
     <label for="valor">Valor numérico (0 a 9600):</label>
@@ -31,74 +88,79 @@
 
   <div id="resultado"></div>
 
+  <footer>
+    <p>Proyecto educativo para monitoreo ambiental en espacios escolares</p>
+    <img src="https://www.ieal.edu.co/wp-content/uploads/2021/03/IMG_20210310_102942-scaled.jpg" alt="Actividades escolares">
+  </footer>
+
   <script>
     const textos = {
       "Metano": {
         bajo: {
-          titulo: "🔵 Nivel bajo de metano",
-          causa: "Fugas pequeñas en estufas, fermentación de residuos orgánicos, emisiones de ganado.",
-          recomendaciones: "Ventila cocinas, promueve compostaje controlado y biodigestores comunitarios."
+          titulo: "🟢 Nivel bajo de metano",
+          causa: "Fugas pequeñas en estufas del laboratorio o fermentación de residuos en zonas verdes del colegio.",
+          recomendaciones: "Ventila cocinas escolares, promueve compostaje controlado y biodigestores comunitarios en el Liceo Caucasia."
         },
         medio: {
-          titulo: "🟠 Concentración elevada de metano",
-          causa: "Fugas en redes de gas, acumulación en pozos sépticos, vertederos mal gestionados.",
-          recomendaciones: "Revisa instalaciones, evita acumulación de residuos, educa sobre riesgos."
+          titulo: "🟡 Concentración elevada de metano",
+          causa: "Fugas en redes de gas cercanas a aulas técnicas o acumulación en pozos sépticos escolares.",
+          recomendaciones: "Revisa instalaciones, evita acumulación de residuos, educa sobre riesgos en espacios educativos."
         },
         alto: {
           titulo: "🔴 Riesgo crítico por metano",
-          causa: "Escapes graves, fallas en tratamiento de residuos, incendios subterráneos.",
-          recomendaciones: "Evacúa, corta energía, reporta fugas y promueve gestión ambiental."
+          causa: "Escapes graves en laboratorios, fallas en tratamiento de residuos, incendios subterráneos.",
+          recomendaciones: "Evacúa, corta energía, reporta fugas y promueve gestión ambiental escolar."
         }
       },
       "Gases combustibles": {
         bajo: {
-          titulo: "🔵 Presencia mínima de gases inflamables",
-          causa: "Uso doméstico de gas, pequeñas fugas, emisiones de vehículos en reposo.",
-          recomendaciones: "Mantén equipos y vehículos, apaga motores detenidos, promueve transporte limpio."
+          titulo: "🟢 Presencia mínima de gases inflamables",
+          causa: "Uso doméstico de gas en cafetería escolar, pequeñas fugas, emisiones de vehículos en zonas de parqueo.",
+          recomendaciones: "Mantén equipos, apaga motores detenidos, promueve transporte limpio en el colegio."
         },
         medio: {
-          titulo: "🟠 Nivel preocupante de gases combustibles",
-          causa: "Fugas en cilindros, acumulación en garajes, emisiones de vehículos en espacios cerrados.",
+          titulo: "🟡 Nivel preocupante de gases combustibles",
+          causa: "Fugas en cilindros de laboratorios, acumulación en bodegas o garajes escolares.",
           recomendaciones: "Ventila espacios, revisa fugas, fomenta mantenimiento vehicular."
         },
         alto: {
           titulo: "🔴 Alerta por riesgo de explosión",
-          causa: "Escapes graves, acumulación en túneles o zonas con tráfico denso.",
+          causa: "Escapes graves en zonas técnicas, acumulación en túneles o pasillos cerrados.",
           recomendaciones: "Evacúa, reporta, promueve zonas libres de vehículos y control de emisiones."
         }
       },
       "Monóxido de carbono": {
         bajo: {
-          titulo: "🔵 Nivel bajo de monóxido de carbono",
-          causa: "Combustión incompleta en estufas, calentadores, vehículos encendidos en garajes.",
-          recomendaciones: "Ventila, mantén equipos, educa sobre riesgos invisibles."
+          titulo: "🟢 Nivel bajo de monóxido de carbono",
+          causa: "Combustión incompleta en estufas del laboratorio o calentadores escolares.",
+          recomendaciones: "Ventila, mantén equipos, educa sobre riesgos invisibles en el entorno educativo."
         },
         medio: {
-          titulo: "🟠 Concentración peligrosa de CO",
-          causa: "Estufas mal calibradas, motores encendidos en espacios cerrados, quema de basura.",
+          titulo: "🟡 Concentración peligrosa de CO",
+          causa: "Estufas mal calibradas, motores encendidos en espacios cerrados del colegio.",
           recomendaciones: "Evita quemar residuos, instala detectores, promueve tecnologías limpias."
         },
         alto: {
           titulo: "🔴 Emergencia por intoxicación",
-          causa: "Incendios, fallas graves en calefacción, acumulación en túneles o sótanos.",
-          recomendaciones: "Evacúa, busca atención médica, fomenta energías renovables."
+          causa: "Incendios, fallas graves en calefacción, acumulación en sótanos escolares.",
+          recomendaciones: "Evacúa, busca atención médica, fomenta energías renovables en la comunidad educativa."
         }
       },
       "Hidrógeno": {
         bajo: {
-          titulo: "🔵 Presencia mínima de hidrógeno",
-          causa: "Procesos industriales, baterías, fermentación natural.",
-          recomendaciones: "Monitorea espacios técnicos, recicla componentes, educa sobre riesgos."
+          titulo: "🟢 Presencia mínima de hidrógeno",
+          causa: "Procesos en laboratorios escolares, baterías en equipos técnicos.",
+          recomendaciones: "Monitorea espacios técnicos, recicla componentes, educa sobre riesgos químicos."
         },
         medio: {
-          titulo: "🟠 Concentración elevada de hidrógeno",
-          causa: "Fugas en almacenamiento, procesos químicos sin ventilación.",
-          recomendaciones: "Ventila talleres, capacita sobre manejo seguro, promueve uso responsable."
+          titulo: "🟡 Concentración elevada de hidrógeno",
+          causa: "Fugas en almacenamiento de reactivos, procesos químicos sin ventilación.",
+          recomendaciones: "Ventila talleres, capacita sobre manejo seguro, promueve uso responsable en el colegio."
         },
         alto: {
           titulo: "🔴 Riesgo extremo de explosión",
-          causa: "Fallas en celdas de combustible, acumulación en espacios cerrados.",
-          recomendaciones: "Evacúa, corta ignición, implementa protocolos y controles ambientales."
+          causa: "Fallas en celdas de combustible, acumulación en espacios cerrados escolares.",
+          recomendaciones: "Evacúa, corta ignición, implementa protocolos y controles ambientales en la institución."
         }
       }
     };
@@ -110,9 +172,9 @@
 
       let nivel;
       if (valor < 80) nivel = "bajo";
-      else if (valor > 500) nivel = "alto";
-      else if (valor > 200) nivel = "medio";
-      else nivel = "bajo"; // entre 80 y 200 se considera bajo por defecto
+      else if (valor <= 200) nivel = "medio";
+      else if (valor <= 500) nivel = "alto";
+      else nivel = "alto"; // puedes agregar "crítico" si lo deseas
 
       if (textos[gas]) {
         const info = textos[gas][nivel];
@@ -128,3 +190,4 @@
   </script>
 </body>
 </html>
+
